@@ -84,7 +84,7 @@ async function selectMultipleTags(allTags) {
 		const selection = await new Promise((resolve) => {
 			nova.workspace.showChoicePalette(
 				choices,
-				{ placeholder: "Select a tag or finish (Esc to cancel)" },
+				{ placeholder: "Select a tag or finish (or Esc)" },
 				(choice) => resolve(choice)
 			);
 		});
