@@ -36,7 +36,8 @@ You can customise the following:
 - This extension requires access to your filesystem to read your blog posts
 - Your blog posts should be in the `_posts` directory (default for Jekyll static site generator)
 - Tags should be defined in the front matter of your posts using the YAML format
+- It can cope with tags specified as an array or as one per-line
 
 ## Support
 
-If you encounter any issues or have feature requests, please open an issue on the GitHub repository.
+If you encounter any issues please open an issue on the GitHub repository.

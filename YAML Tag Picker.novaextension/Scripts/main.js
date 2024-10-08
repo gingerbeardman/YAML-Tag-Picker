@@ -16,7 +16,7 @@ async function selectTags(editor) {
 		return;
 	}
 
-	console.log("Workspace path:", blogPath);
+	// console.log("Workspace path:", blogPath);
 
 	// Get the settings
 	const postsFolderName = nova.config.get("jekyll-tag-picker.postsFolderName") || "_posts";
@@ -24,7 +24,7 @@ async function selectTags(editor) {
 
 	try {
 		const allTags = await getAllTags(blogPath, postsFolderName);
-		console.log("Found tags:", allTags);
+		// console.log("Found tags:", allTags);
 		if (allTags.length === 0) {
 			nova.workspace.showErrorMessage("No tags found in your Jekyll blog posts.");
 			return;
@@ -34,7 +34,7 @@ async function selectTags(editor) {
 		const filteredAndSortedTags = allTags
 			.filter(tag => !tag.startsWith(skipCharacter))
 			.sort((a, b) => a.localeCompare(b));
-		console.log("Filtered and sorted tags:", filteredAndSortedTags);
+		// console.log("Filtered and sorted tags:", filteredAndSortedTags);
 
 		if (filteredAndSortedTags.length === 0) {
 			nova.workspace.showErrorMessage("No valid tags found after filtering.");
@@ -42,7 +42,7 @@ async function selectTags(editor) {
 		}
 
 		const selectedTags = await selectMultipleTags(filteredAndSortedTags);
-		console.log("Selected tags:", selectedTags);
+		// console.log("Selected tags:", selectedTags);
 
 		if (selectedTags.length > 0) {
 			// Get the tag prefix from settings
@@ -55,12 +55,12 @@ async function selectTags(editor) {
 				editor.edit((e) => {
 					e.insert(range.start, insertion + '\n');
 				});
-				console.log("Inserted tags:", selectedTags);
+				// console.log("Inserted tags:", selectedTags);
 			} else {
-				console.log("No active editor found to insert tags");
+				// console.log("No active editor found to insert tags");
 			}
 		} else {
-			console.log("No tags were selected");
+			// console.log("No tags were selected");
 		}
 	} catch (error) {
 		console.error("Error in tag selection process:", error);
@@ -91,24 +91,24 @@ async function selectMultipleTags(allTags) {
 
 		if (selection === undefined || selection === null) {
 			// User pressed Esc, cancel the whole process
-			console.log("Selection cancelled");
+			// console.log("Selection cancelled");
 			continuing = false;
 		} else if (selection === "Finish Selection") {
-			console.log("Selection finished");
+			// console.log("Selection finished");
 			continuing = false;
 		} else {
 			selectedTags.push(selection);
-			console.log(`Selected tag: ${selection}`);
+			// console.log(`Selected tag: ${selection}`);
 		}
 	}
 
-	console.log("Final selected tags:", selectedTags);
+	// console.log("Final selected tags:", selectedTags);
 	return selectedTags;
 }
 
 async function getAllTags(blogPath, postsFolderName) {
 	const postsDir = nova.path.join(blogPath, postsFolderName);
-	console.log("Posts directory:", postsDir);
+	// console.log("Posts directory:", postsDir);
 	const tags = new Set();
 
 	try {
@@ -122,7 +122,7 @@ async function getAllTags(blogPath, postsFolderName) {
 }
 
 async function processDirectory(dir, tags) {
-	console.log("Processing directory:", dir);
+	// console.log("Processing directory:", dir);
 	const entries = await nova.fs.listdir(dir);
 	
 	for (const entry of entries) {
@@ -132,28 +132,28 @@ async function processDirectory(dir, tags) {
 		if (stats.isDirectory()) {
 			await processDirectory(fullPath, tags);
 		} else if (stats.isFile() && (entry.endsWith('.md') || entry.endsWith('.markdown'))) {
-			console.log("Processing file:", fullPath);
+			// console.log("Processing file:", fullPath);
 			try {
 				const file = await nova.fs.open(fullPath, 'r');
 				const content = await file.readlines().join('\n');
 				file.close();
 				const frontMatter = extractFrontMatter(content);
 				if (frontMatter) {
-					console.log("Extracted front matter:", frontMatter);
+					// console.log("Extracted front matter:", frontMatter);
 					if (frontMatter.tags) {
-						console.log("Tags found in file:", frontMatter.tags);
+						// console.log("Tags found in file:", frontMatter.tags);
 						addTags(frontMatter.tags, tags);
 					} else {
-						console.log("No tags found in this file");
+						// console.log("No tags found in this file");
 					}
 				} else {
-					console.log("No front matter found in this file");
+					// console.log("No front matter found in this file");
 				}
 			} catch (error) {
 				console.error("Error reading file:", fullPath, error);
 			}
 		} else {
-			console.log("Skipping non-markdown file:", fullPath);
+			// console.log("Skipping non-markdown file:", fullPath);
 		}
 	}
 }
@@ -184,7 +184,7 @@ function addTags(fileTags, tagSet) {
 }
 
 function parseYAML(yamlString) {
-	console.log("Parsing YAML:", yamlString);
+	// console.log("Parsing YAML:", yamlString);
 	const lines = yamlString.split('\n');
 	const result = {};
 	let currentKey = null;
@@ -220,6 +220,6 @@ function parseYAML(yamlString) {
 		}
 	});
 
-	console.log("Parsed YAML result:", result);
+	// console.log("Parsed YAML result:", result);
 	return result;
 }
