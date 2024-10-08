@@ -1,0 +1,45 @@
+{
+	"identifier": "com.gingerbeardman.YAMLTagPicker",
+	"name": "YAML Tag Picker",
+	"organization": "Matt Sephton",
+	"description": "Presents a picker for selecting tags from your YAML front matter.",
+	"version": "1.0",
+	"repository": "https://github.com/gingerbeardman/YAML-Tag-Picker",
+	"bugs": "https://github.com/gingerbeardman/YAML-Tag-Picker/issues",
+	"homepage": "https://www.gingerbeardman.com",
+	"funding": "https://ko-fi.com/gingerbeardman",
+	"categories": ["commands"],
+	"main": "main.js",
+	"activationEvents": ["onWorkspaceContains:_posts"],
+	"entitlements": {
+		"filesystem": "readwrite"
+	},
+	"commands": {
+		"editor": [
+			{
+				"title": "YAML Tag Picker",
+				"command": "jekyll-tag-picker.selectTags"
+			}
+		]
+	},
+	"config": [
+		{
+			"key": "jekyll-tag-picker.postsFolderName",
+			"title": "Posts Folder Name",
+			"type": "string",
+			"default": "_posts"
+		},
+		{
+			"key": "jekyll-tag-picker.tagPrefix",
+			"title": "Tag Prefix Character",
+			"type": "string",
+			"default": "-"
+		},
+		{
+			"key": "jekyll-tag-picker.skipCharacter",
+			"title": "Skip Tags Containing",
+			"type": "string",
+			"default": "'"
+		}
+	]
+}
