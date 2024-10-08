@@ -10,7 +10,7 @@ Recommended download from [Nova Extensions](https://extensions.panic.com/extensi
 
 ## Screenshot
 
-![yaml-tag-picker](https://github.com/user-attachments/assets/646201a0-59ff-4bb4-826e-b11a1d700885)
+![yaml-tag-picker](https://github.com/user-attachments/assets/66409f92-63b6-4fb9-9a26-4840cb5e3e9c)
 
 # Licence
 
