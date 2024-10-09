@@ -3,7 +3,7 @@
 	"name": "YAML Tag Picker",
 	"organization": "Matt Sephton",
 	"description": "Presents a picker for selecting tags from your YAML front matter.",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"repository": "https://github.com/gingerbeardman/YAML-Tag-Picker",
 	"bugs": "https://github.com/gingerbeardman/YAML-Tag-Picker/issues",
 	"homepage": "https://www.gingerbeardman.com",

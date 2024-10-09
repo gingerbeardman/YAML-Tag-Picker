@@ -14,9 +14,10 @@ Each tag is inserted on a new line, prefixed with a hyphen and a space:
 
 1. Open your blog project in Nova
 2. Place your cursor at the start of the line where you want to insert tags in your front matter
-3. Run the `YAML Tag Picker` command from the Command Palette (`Cmd`+`Shift`+`Enter`)
-4. Choose the tags you want to use from the presented list
-5. The selected tags will be inserted at your cursor position
+3. Run the `YAML Tag Picker` command from the Command Palette (I map it to keyboard `Cmd`+`Shift`+`Enter`)
+4. Choose the tags you want to use from the presented list (repeat)
+5. When you're done choose "Finish Selection" or press `Esc`
+6. The selected tags will be inserted at your cursor position
 
 ### Configuration
 

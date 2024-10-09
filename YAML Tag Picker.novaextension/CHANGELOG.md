@@ -1,3 +1,7 @@
+## Version 1.0.3
+
+Improved: README
+
 ## Version 1.0.2
 
 Shorter chooser prompt
