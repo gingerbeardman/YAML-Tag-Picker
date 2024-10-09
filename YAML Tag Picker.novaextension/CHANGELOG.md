@@ -1,3 +1,7 @@
+## Version 1.0.4
+
+Improved: README and icon
+
 ## Version 1.0.3
 
 Improved: README
