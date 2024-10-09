@@ -8,6 +8,10 @@ See the internal [README](/YAML%20Tag%20Picker.novaextension/README.md) for more
 
 Recommended download from [Nova Extensions](https://extensions.panic.com/extensions/com.gingerbeardman/com.gingerbeardman.YAMLTagPicker/) website.
 
+## Screenshot
+
+![yaml-tag-picker](https://github.com/user-attachments/assets/66409f92-63b6-4fb9-9a26-4840cb5e3e9c)
+
 # Licence
 
 [MIT](/LICENSE)
