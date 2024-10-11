@@ -1,6 +1,7 @@
 exports.activate = function() {
 	// Register the command
 	nova.commands.register("jekyll-tag-picker.selectTags", (editor) => selectTags(editor));
+	nova.commands.register("jekyll-tag-picker.createTagAuditDocument", (editor) => createTagAuditDocument(editor));
 }
 
 async function selectTags(editor) {
@@ -222,4 +223,43 @@ function parseYAML(yamlString) {
 
 	// console.log("Parsed YAML result:", result);
 	return result;
+}
+
+async function createTagAuditDocument() {
+	const workspace = nova.workspace;
+	if (!workspace) {
+		nova.workspace.showErrorMessage("No active workspace found.");
+		return;
+	}
+
+	const blogPath = workspace.path;
+	if (!blogPath) {
+		nova.workspace.showErrorMessage("Unable to determine workspace path.");
+		return;
+	}
+
+	const postsFolderName = nova.config.get("jekyll-tag-picker.postsFolderName") || "_posts";
+
+	try {
+		const allTags = await getAllTags(blogPath, postsFolderName);
+		if (allTags.length === 0) {
+			nova.workspace.showErrorMessage("No tags found in your Jekyll blog posts.");
+			return;
+		}
+
+		// Sort tags alphabetically
+		const sortedTags = allTags.sort((a, b) => a.localeCompare(b));
+
+		// Prepare the content for the new document
+		const content = "# YAML Tag Audit\n\nTotal unique tags: " + sortedTags.length + "\n\n" + sortedTags.join("\n");
+
+		// Create a new document with the prepared content
+		await nova.workspace.openNewTextDocument({
+			content: content,
+			syntax: "markdown"
+		});
+	} catch (error) {
+		console.error("Error in creating tags audit:", error);
+		nova.workspace.showErrorMessage("Error in creating tags audit: " + error.message);
+	}
 }

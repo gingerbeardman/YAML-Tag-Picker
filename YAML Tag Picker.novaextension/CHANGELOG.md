@@ -1,3 +1,7 @@
+## Version 1.1.0
+
+Added: Create YAML Tag Audit document
+
 ## Version 1.0.4
 
 Improved: README and icon
