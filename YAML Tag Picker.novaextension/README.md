@@ -45,4 +45,4 @@ If you encounter any issues please open an issue on the GitHub repository.
 
 ## Bonus!
 
-There's also a command to `Create YAML Tag Audit document` which will open a markdown file containing all tags, so you can do some rationalising or coallescing with search and replace.
+There's also a command to **Create YAML Tag Audit document** which will open a markdown file containing all tags, so you can do some rationalising or coallescing with search and replace.
