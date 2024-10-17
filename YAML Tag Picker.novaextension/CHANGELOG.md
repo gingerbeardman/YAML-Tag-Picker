@@ -1,6 +1,6 @@
 ## Version 1.1.1
 
-Added: gradient icon
+Change: gradient icon
 
 ## Version 1.1.0
 
