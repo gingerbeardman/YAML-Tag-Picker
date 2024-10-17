@@ -1,3 +1,7 @@
+## Version 1.1.1
+
+Added: gradient icon
+
 ## Version 1.1.0
 
 Added: Create YAML Tag Audit document

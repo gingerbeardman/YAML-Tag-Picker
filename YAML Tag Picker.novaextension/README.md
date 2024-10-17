@@ -10,6 +10,8 @@ Each tag is inserted on a new line, prefixed with a hyphen and a space:
 - this
 ```
 
+This extension does not suggest new tags, it just allows you to pick from your tags you've already used.
+
 ## Usage
 
 1. Open your blog project in Nova
@@ -45,4 +47,4 @@ If you encounter any issues please open an issue on the GitHub repository.
 
 ## Bonus!
 
-There's also a command to **Create YAML Tag Audit document** which will open a markdown file containing all tags, so you can do some rationalising or coallescing with search and replace.
+There's also a command to **Create YAML Tag Audit document** which will open a markdown file containing all tags, including duplicates, so you can do some manual rationalising or coallescing with the help of search and replace.

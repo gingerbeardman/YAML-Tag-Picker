@@ -1,33 +1,33 @@
 {
+  "version" : 1,
   "id" : "24670896-9CE6-40DD-86CB-111B3E0DEB8D",
   "iconOffset" : [
     0,
     0
   ],
+  "shadowOpacity" : 0,
   "bottomColor" : {
     "alpha" : 1,
-    "blue" : 0.3666534424,
-    "green" : 0.658501327,
-    "red" : 0.9728776813
+    "green" : 0.6588235294117647,
+    "blue" : 0.36470588235294116,
+    "red" : 0.9725490196078431
+  },
+  "symbolColor" : {
+    "blue" : 0.9999999403953552,
+    "alpha" : 1,
+    "red" : 0.9999999403953552,
+    "green" : 0.9999999403953552
+  },
+  "topColor" : {
+    "red" : 0.9725490196078431,
+    "blue" : 0.4811413911290925,
+    "alpha" : 1,
+    "green" : 0.8319927600850067
   },
   "iconScale" : 0.6779560368342596,
   "shadowHeight" : 0.3,
-  "topColor" : {
-    "blue" : 0.3666534424,
-    "green" : 0.658501327,
-    "red" : 0.9728776813,
-    "alpha" : 1
-  },
   "symbol" : {
     "family" : "sf-symbols",
     "name" : "tag.fill"
-  },
-  "shadowOpacity" : 0,
-  "symbolColor" : {
-    "green" : 0.9999999403953552,
-    "blue" : 0.9999999403953552,
-    "alpha" : 1,
-    "red" : 0.9999999403953552
-  },
-  "version" : 1
+  }
 }
