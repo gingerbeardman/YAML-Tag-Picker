@@ -1,3 +1,7 @@
+## Version 1.1.2
+
+Change: settings description
+
 ## Version 1.1.1
 
 Change: gradient icon

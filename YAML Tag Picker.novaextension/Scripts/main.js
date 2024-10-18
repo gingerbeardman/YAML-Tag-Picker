@@ -1,5 +1,4 @@
 exports.activate = function() {
-	// Register the command
 	nova.commands.register("jekyll-tag-picker.selectTags", (editor) => selectTags(editor));
 	nova.commands.register("jekyll-tag-picker.createTagAuditDocument", (editor) => createTagAuditDocument(editor));
 }
