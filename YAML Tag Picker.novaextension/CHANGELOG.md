@@ -1,3 +1,9 @@
+## Version 2.0.0
+
+Add: insert creation/modified date ISO into front matter
+
+----
+
 ## Version 1.1.2
 
 Change: settings description

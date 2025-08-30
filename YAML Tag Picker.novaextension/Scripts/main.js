@@ -1,6 +1,8 @@
 exports.activate = function() {
 	nova.commands.register("jekyll-tag-picker.selectTags", (editor) => selectTags(editor));
 	nova.commands.register("jekyll-tag-picker.createTagAuditDocument", (editor) => createTagAuditDocument(editor));
+	nova.commands.register("jekyll-tag-picker.addCreationDate", (editor) => addCreationDate(editor));
+	nova.commands.register("jekyll-tag-picker.addModifiedDate", (editor) => addModifiedDate(editor));
 }
 
 async function selectTags(editor) {
@@ -261,4 +263,100 @@ async function createTagAuditDocument() {
 		console.error("Error in creating tags audit:", error);
 		nova.workspace.showErrorMessage("Error in creating tags audit: " + error.message);
 	}
+}
+
+async function addCreationDate(editor) {
+	if (!editor) {
+		nova.workspace.showErrorMessage("No active editor found.");
+		return;
+	}
+
+	const currentDate = formatDateForYAML(new Date());
+	await addOrReplaceDateField(editor, 'date', currentDate);
+}
+
+async function addModifiedDate(editor) {
+	if (!editor) {
+		nova.workspace.showErrorMessage("No active editor found.");
+		return;
+	}
+
+	const currentDate = formatDateForYAML(new Date());
+	await addOrReplaceDateField(editor, 'modified', currentDate);
+}
+
+function formatDateForYAML(date) {
+	// Format: '2025-08-28T11:00+01:00'
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, '0');
+	const day = String(date.getDate()).padStart(2, '0');
+	const hours = String(date.getHours()).padStart(2, '0');
+	const minutes = String(date.getMinutes()).padStart(2, '0');
+	
+	// Get timezone offset in format +HH:MM or -HH:MM
+	const timezoneOffset = date.getTimezoneOffset();
+	const offsetHours = Math.floor(Math.abs(timezoneOffset) / 60);
+	const offsetMinutes = Math.abs(timezoneOffset) % 60;
+	const offsetSign = timezoneOffset <= 0 ? '+' : '-';
+	const timezoneString = `${offsetSign}${String(offsetHours).padStart(2, '0')}:${String(offsetMinutes).padStart(2, '0')}`;
+	
+	return `'${year}-${month}-${day}T${hours}:${minutes}${timezoneString}'`;
+}
+
+async function addOrReplaceDateField(editor, fieldName, dateValue) {
+	const document = editor.document;
+	const content = document.getTextInRange(new Range(0, document.length));
+	
+	// Check if the document has YAML front matter
+	const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---/;
+	const match = content.match(frontMatterRegex);
+	
+	if (!match) {
+		nova.workspace.showErrorMessage("No YAML front matter found in the current document.");
+		return;
+	}
+	
+	const frontMatterContent = match[1];
+	const frontMatterStart = match.index + 4; // Position after "---\n"
+	const frontMatterEnd = frontMatterStart + frontMatterContent.length;
+	
+	// Check if the field already exists
+	const fieldRegex = new RegExp(`^${fieldName}:\\s*.*$`, 'm');
+	const fieldMatch = frontMatterContent.match(fieldRegex);
+	
+	editor.edit((edit) => {
+		if (fieldMatch) {
+			// Replace existing field
+			const fieldStart = frontMatterStart + frontMatterContent.indexOf(fieldMatch[0]);
+			const fieldEnd = fieldStart + fieldMatch[0].length;
+			const newField = `${fieldName}: ${dateValue}`;
+			edit.replace(new Range(fieldStart, fieldEnd), newField);
+		} else {
+			// Add new field - find the best position to insert it
+			const lines = frontMatterContent.split('\n');
+			let insertPosition = frontMatterStart;
+			let insertAfterLine = -1;
+			
+			// Try to insert after title, or after layout, or at the beginning
+			for (let i = 0; i < lines.length; i++) {
+				const line = lines[i].trim();
+				if (line.startsWith('title:') || line.startsWith('layout:')) {
+					insertAfterLine = i;
+					break;
+				}
+			}
+			
+			if (insertAfterLine >= 0) {
+				// Calculate position after the found line
+				let pos = frontMatterStart;
+				for (let i = 0; i <= insertAfterLine; i++) {
+					pos += lines[i].length + 1; // +1 for newline
+				}
+				insertPosition = pos;
+			}
+			
+			const newField = `${fieldName}: ${dateValue}\n`;
+			edit.insert(insertPosition, newField);
+		}
+	});
 }

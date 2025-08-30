@@ -3,7 +3,7 @@
 	"name": "YAML Tag Picker",
 	"organization": "Matt Sephton",
 	"description": "Presents a picker for selecting tags from your YAML front matter",
-	"version": "1.1.2",
+	"version": "2.0.0",
 	"repository": "https://github.com/gingerbeardman/YAML-Tag-Picker",
 	"bugs": "https://github.com/gingerbeardman/YAML-Tag-Picker/issues",
 	"homepage": "https://www.gingerbeardman.com",
@@ -23,6 +23,14 @@
 			{
 				"title": "Create YAML Tag Audit document",
 				"command": "jekyll-tag-picker.createTagAuditDocument"
+			},
+			{
+				"title": "Add Creation Date ISO",
+				"command": "jekyll-tag-picker.addCreationDate"
+			},
+			{
+				"title": "Add Modified Date ISO",
+				"command": "jekyll-tag-picker.addModifiedDate"
 			}
 		]
 	},

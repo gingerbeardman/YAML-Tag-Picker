@@ -48,3 +48,5 @@ If you encounter any issues please open an issue on the GitHub repository.
 ## Bonus!
 
 There's also a command to **Create YAML Tag Audit document** which will open a markdown file containing all tags, including duplicates, so you can do some manual rationalising or coallescing with the help of search and replace.
+
+And also two commands to **Add Creation Date ISO** and **Add Modified Date ISO** which will either add a new line to the front matter or update any existing line of that type. 
