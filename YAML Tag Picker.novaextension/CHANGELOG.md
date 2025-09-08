@@ -1,3 +1,7 @@
+## Version 2.1.0
+
+Change: tweaked insertion point of ISO date/modified lines
+
 ## Version 2.0.0
 
 Add: insert creation/modified date ISO into front matter

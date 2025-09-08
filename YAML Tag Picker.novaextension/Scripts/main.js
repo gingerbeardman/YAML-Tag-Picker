@@ -332,17 +332,38 @@ async function addOrReplaceDateField(editor, fieldName, dateValue) {
 			const newField = `${fieldName}: ${dateValue}`;
 			edit.replace(new Range(fieldStart, fieldEnd), newField);
 		} else {
-			// Add new field - find the best position to insert it
+			// Add new field - find the correct position to insert it
 			const lines = frontMatterContent.split('\n');
 			let insertPosition = frontMatterStart;
 			let insertAfterLine = -1;
 			
-			// Try to insert after title, or after layout, or at the beginning
-			for (let i = 0; i < lines.length; i++) {
-				const line = lines[i].trim();
-				if (line.startsWith('title:') || line.startsWith('layout:')) {
-					insertAfterLine = i;
-					break;
+			if (fieldName === 'date') {
+				// Date should go under title line
+				for (let i = 0; i < lines.length; i++) {
+					const line = lines[i].trim();
+					if (line.startsWith('title:')) {
+						insertAfterLine = i;
+						break;
+					}
+				}
+			} else if (fieldName === 'modified') {
+				// Modified should go under date line, or under title if no date
+				for (let i = 0; i < lines.length; i++) {
+					const line = lines[i].trim();
+					if (line.startsWith('date:')) {
+						insertAfterLine = i;
+						break;
+					}
+				}
+				// If no date line found, look for title
+				if (insertAfterLine === -1) {
+					for (let i = 0; i < lines.length; i++) {
+						const line = lines[i].trim();
+						if (line.startsWith('title:')) {
+							insertAfterLine = i;
+							break;
+						}
+					}
 				}
 			}
 			
